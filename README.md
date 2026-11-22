@@ -12,7 +12,7 @@ Necesita Python 3 y nada más: solo usa `random` y `time`, que ya vienen con Pyt
 python main.py
 ```
 
-En Mac, si `python` no funciona, usa `python3 main.py`. Se demora unos 15 segundos, casi todo por la burbuja con 8.000 números.
+En Mac, si `python` no funciona, usa `python3 main.py`. En mi Mac se demora unos 10 segundos, casi todo por la burbuja con 8.000 números.
 
 ## Archivos
 
@@ -40,6 +40,20 @@ La búsqueda binaria trabaja sobre la lista que deja ordenada Merge Sort. Ese or
 - Cada tamaño se mide 5 veces y me quedo con el tiempo menor. Si la compu se distrae con otro programa eso solo suma tiempo, así que el menor es la medición más limpia.
 - Una búsqueda sola dura microsegundos y el cronómetro casi no la ve. Por eso cada medición de búsqueda hace 1.000 búsquedas del número 0, que nunca está en la lista: ese es el peor caso de las dos.
 - En pantalla sale una tabla por algoritmo con `n`, el tiempo en segundos y la razón con la medición anterior.
+
+## Resultados en mi Mac
+
+Corrida del 17 de noviembre de 2026 (Python 3.14). Los segundos cambian en cada computador; lo que hay que mirar son las razones.
+
+| n | Burbuja (s) | razón | Merge Sort (s) | razón | Lineal (s) | razón | Binaria (s) | razón |
+|---|---|---|---|---|---|---|---|---|
+| 1000 | 0.01757 | - | 0.00087 | - | 0.01490 | - | 0.00052 | - |
+| 2000 | 0.07260 | 4.13 | 0.00203 | 2.32 | 0.02970 | 1.99 | 0.00060 | 1.16 |
+| 4000 | 0.30746 | 4.24 | 0.00421 | 2.07 | 0.06051 | 2.04 | 0.00067 | 1.11 |
+| 8000 | 1.23283 | 4.01 | 0.00860 | 2.04 | 0.12129 | 2.00 | 0.00072 | 1.07 |
+| teoría | | ~4 | | ~2,2 | | ~2 | | ~1,1 |
+
+La burbuja, la lineal y la binaria cuadran con la teoría. Merge Sort se cumple a medias: está sobre 2, pero las dos últimas razones quedaron debajo de 2,2. En otra corrida del 22 de noviembre Merge Sort dio 2.06, 1.83 y 1.97, mientras la burbuja y la lineal casi no cambiaron. Cuando una medición dura pocos milisegundos la razón baila bastante. La explicación completa está en el informe.
 
 ## Profiling con cProfile
 
